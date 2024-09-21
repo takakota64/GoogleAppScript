@@ -1,0 +1,84 @@
+//要因配信
+function myFunction() {
+  // スプレッドシートから営業リストを取得する
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("既存");
+  var range = sheet.getRange(2, 1, sheet.getLastRow() - 1, 11); // 1列目から11列目までのデータを取得
+  var data = range.getValues();
+
+  if (data.length === 0) {
+    Logger.log("データがありません");
+    return;
+  }
+
+  data.forEach(function(row) {
+    var checkbox = row[0]; // A列（チェックボックス）
+    var company = row[2];  // C列（会社名）
+    var name = row[6];     // G列（氏名）
+    var address = row[10]; // K列（メールアドレス）
+
+    if (checkbox) {
+      Logger.log("メールを送信しません: " + name + "（チェック済み）");
+      return; // チェックされている行はスキップ
+    }
+
+    // メールアドレスの形式が正しいかを確認する正規表現//
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // アドレスが無効(空白)な場合はログを出力してスキップ//
+    if (!emailRegex.test(address)) {
+      Logger.log("無効なメールアドレス: " + address + "（" + name + "）");
+      return; // 無効なメールアドレスをスキップ
+    }
+  //------------------------------↑いじらない↑-------------------------------------------------//
+  
+
+    //件名//
+    var subject = "サーバー構築1年!弊社プロパーのご紹介";
+
+
+    //bodyの中身が本文{company}と{name}はスプシから参照してるからいじらない//
+    var body =
+`${company}
+${name} 様
+
+お世話になります。
+アワーズシップ株式会社です。
+
+下記、弊社プロパーが営業中となります。
+見合う案件ございましたら、ぜひご紹介いただけますと幸いです。
+
+------------------------------------------------------------------
+要員配信テスト
+■氏 名:N.O（25歳 女性）
+■所 属：弊社正社員
+■最寄駅：東急東横線 武蔵小杉駅
+■単 価:50万（応相談）
+■稼 働:9月～
+■並 行：並行営業中
+■スキル:Linuxサーバー構築1年
+【 O S 】:RHEL8、CentOS8、VMwareESXi8
+【 M W 】:Zabbix、JBOSS、Apache、Tomcat、Postfix
+【 D B 】:MariaDB 
+【その他】:TeraTerm、WinSCP
+          Excel、PowerPoint、Word
+■備 考：
+現在はAWS SAA資格取得に向けて自己学習を行うなど、日々新しい知識を身につけられるよう努めております。
+
+経歴としてはサーバー構築に多く携わらせていただいていますが、構築でわからないことは有識者の方と原因調査を行い、解決していきながら手順を進めてきました。
+今後は携わるシステムやサービスについてより理解を深めるべく、保守や運用にも積極的にチャレンジさせていただき、幅広い知識を持つエンジニアを目指していきたいと考えております。
+
+また、前職で培った責任感や幅広い年齢層の方々とのコミュニケーション能力やニーズを汲み取る力を活かして
+ミスなく丁寧に業務を行うことを大切にしています。
+■スキルシートURL:https://docs.google.com/spreadsheets/d/1moZCCwwsjVI3od26Ys_eGaiN23Vko5gO/edit?gid=163697601#gid=163697601
+------------------------------------------------------------------
+
+以上、よろしくお願いいたします。
+`;
+
+    // sendEmail = 送信　createDraft = 下書き作成　C+/でコメントアウトを消す
+    // GmailApp.sendEmail(address, subject, body);
+    GmailApp.createDraft(address, subject, body);
+   
+  });
+}
