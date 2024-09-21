@@ -1,4 +1,4 @@
-//メールアドレス用
+//案件配信
 function myFunction() {
   // スプレッドシートから営業リストを取得する
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -15,7 +15,7 @@ function myFunction() {
     var checkbox = row[0]; // A列（チェックボックス）
     var company = row[2];  // C列（会社名）
     var name = row[6];     // G列（氏名）
-    var address = row[10]; // K列（メールアドレス）
+    var address = row[9]; // K列（メールアドレス）
 
     if (checkbox) {
       Logger.log("メールを送信しません: " + name + "（チェック済み）");
