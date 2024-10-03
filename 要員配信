@@ -1,4 +1,4 @@
-//要因配信
+//要員配信
 function myFunction() {
   // スプレッドシートから営業リストを取得する
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -22,63 +22,81 @@ function myFunction() {
       return; // チェックされている行はスキップ
     }
 
-    // メールアドレスの形式が正しいかを確認する正規表現//
+    // メールアドレスの形式が正しいかを確認する正規表現
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // アドレスが無効(空白)な場合はログを出力してスキップ//
+    // アドレスが無効(空白)な場合はログを出力してスキップ
     if (!emailRegex.test(address)) {
       Logger.log("無効なメールアドレス: " + address + "（" + name + "）");
       return; // 無効なメールアドレスをスキップ
     }
-  //------------------------------↑いじらない↑-------------------------------------------------//
-  
 
-    //件名//
-    var subject = "サーバー構築1年!弊社プロパーのご紹介";
+    // 件名
+    var subject = "【アワーズシップ要員情報】インフラ要員2名の紹介！";
 
-
-    //bodyの中身が本文{company}と{name}はスプシから参照してるからいじらない//
+    // メール本文
     var body =
 `${company}
 ${name} 様
-
-お世話になります。
-アワーズシップ株式会社です。
-
-下記、弊社プロパーが営業中となります。
-見合う案件ございましたら、ぜひご紹介いただけますと幸いです。
-
+【要員情報①】
 ------------------------------------------------------------------
-要員配信テスト
-■氏 名:N.O（25歳 女性）
-■所 属：弊社正社員
-■最寄駅：東急東横線 武蔵小杉駅
-■単 価:50万（応相談）
-■稼 働:9月～
-■並 行：並行営業中
-■スキル:Linuxサーバー構築1年
-【 O S 】:RHEL8、CentOS8、VMwareESXi8
-【 M W 】:Zabbix、JBOSS、Apache、Tomcat、Postfix
-【 D B 】:MariaDB 
-【その他】:TeraTerm、WinSCP
-          Excel、PowerPoint、Word
-■備 考：
-現在はAWS SAA資格取得に向けて自己学習を行うなど、日々新しい知識を身につけられるよう努めております。
+■氏　名：K.A（34歳　男性）
+■所　属：弊社正社員
+■最寄駅：JR武蔵野線/埼京線　武蔵浦和駅
+■単　価：80万（相談可）
+■稼　働：11月～
+■並　行：並行営業中
+■スキル：Linuxサーバー構築8年、AWS2年
+【 O　S 】：RHEL、AWS、WindowsServer、CentOS、VMwareESXi
+【 M　W 】：Openstack、Zabbix、Ansible、HULFT、JBOSS、Apache、Tomcat、Postfix、Splunk、Docker
+【 D　B 】：Db2、SQLServer、MariaDB
+【その他】：TeraTerm、WinSCP
+　　　　　　Excel、PowerPoint、Word
+■備　考：
+過去、8年間サーバエンジニアとして、金融・通信・公共系のシステム基盤の要件定義・設計・開発・運用保守・障害対応の業務に携わる。
+また、前職の自社業務におきましても、新入社員の教育や既存リーダーのマネージメント等にも携わってきました。
+直近では、某クレジットカード会社様のプロジェクトにおいて、AWSのEC2設計、CloudFomationを使用した
+CloudWatchのアラーム・メトリクス監視設計をはじめ、ダッシュボードの構築等にも携わって参りました。
+AWSの設計・構築、OpenStack設計・構築、LinuxOSをはじめとするミドルウェアの設計、構築を得意としております。
+これまでの経験を活かし、様々なシステムの問題解決をするポジションで、お役に立っていきたいと考えております。
+------------------------------------------------------------------
+スキルシートURL
+https://docs.google.com/spreadsheets/d/1Pc0mknUYdoDm_y7Udr1qX0yYGeXyuXRM/edit?usp=sharing&ouid=108230509810629306287&rtpof=true&sd=true
 
+【要員情報②】
+------------------------------------------------------------------
+■氏　名：N.O（25歳　女性）
+■所　属：弊社正社員
+■最寄駅：東急東横線　武蔵小杉駅
+■単　価：50万（相談可）
+■稼　働：即日
+■並　行：並行営業中
+■スキル：Linuxサーバー構築1年
+【 O　S 】：RHEL8、CentOS8、VMwareESXi8
+【 M　W 】：Zabbix、JBOSS、Apache、Tomcat、Postfix
+【 D　B 】：MariaDB
+【その他】：TeraTerm、WinSCP
+　　　　　　Excel、PowerPoint、Word
+■備　考：
+現在はAWS SAA資格取得に向けて自己学習を行うなど、日々新しい知識を身につけられるよう努めております。
 経歴としてはサーバー構築に多く携わらせていただいていますが、構築でわからないことは有識者の方と原因調査を行い、解決していきながら手順を進めてきました。
 今後は携わるシステムやサービスについてより理解を深めるべく、保守や運用にも積極的にチャレンジさせていただき、幅広い知識を持つエンジニアを目指していきたいと考えております。
-
 また、前職で培った責任感や幅広い年齢層の方々とのコミュニケーション能力やニーズを汲み取る力を活かして
 ミスなく丁寧に業務を行うことを大切にしています。
-■スキルシートURL:https://docs.google.com/spreadsheets/d/1moZCCwwsjVI3od26Ys_eGaiN23Vko5gO/edit?gid=163697601#gid=163697601
 ------------------------------------------------------------------
-
-以上、よろしくお願いいたします。
+スキルシートURL
+https://docs.google.com/spreadsheets/d/1moZCCwwsjVI3od26Ys_eGaiN23Vko5gO/edit?usp=sharing&ouid=108230509810629306287&rtpof=true&sd=true
 `;
 
-    // sendEmail = 送信　createDraft = 下書き作成　C+/でコメントアウトを消す
-    // GmailApp.sendEmail(address, subject, body);
-    GmailApp.createDraft(address, subject, body);
-   
+    // メール送信
+    // GmailApp.sendEmail(address, subject, body, {
+    //   name: "アワーズシップ営業",
+    //   from: "sales@oursship.co.jp"
+    // });
+     GmailApp.createDraft(address, subject, body, {
+      name: "アワーズシップ営業",
+      from: "sales@oursship.co.jp"
+    });
+
   });
 }
